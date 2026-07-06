@@ -1,13 +1,33 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Ei5Ot7FV)
-# Project Title
+# QIDK Image Inpainting
 
-### Team Number : Team Name
+This project implements AI-based image inpainting accelerated on Qualcomm NPUs. It features a complete Android application (`LamaInpaint`) and benchmarking scripts to evaluate inference performance.
 
----
+## Overview
 
-NOTE : 
+Image inpainting aims to reconstruct missing or masked regions in an image seamlessly. We leverage a high-performance inpainting model optimized for edge devices, taking advantage of Qualcomm Neural Network (QNN) libraries to run inference efficiently on the Neural Processing Unit (NPU).
 
-1. The `Demos` folder shall contain videos and Images or Readme file with link to the video(public link).
-2. The `Presentation` folder shall contain **pdf** version of the presentations used for the final evalutation.
-3. The `Code` folder shall contain **all**, **and any**, code used for the project.
- 
+## Components
+
+1. **Android Application (`Code/LamaInpaint`)**
+   - A fully functional Android app that lets users mask parts of an image and generate inpainted results on-device.
+   - Integrated with Qualcomm's QNN SDK to hardware-accelerate model inference.
+   
+2. **Benchmarking Suite (`Code/qidk-benchmarking`)**
+   - Scripts and tools for testing the throughput, latency, and quality of the inpainting model across different hardware targets (CPU vs NPU).
+   - Includes a sample generator for robust testing.
+
+3. **Scripts & Models (`Code/scripts`)**
+   - Includes serialized model binaries (e.g., AOTGAN) optimized in FP16 for the NPU.
+
+## Results & Benchmarks
+
+The project demonstrates significant speedups when migrating from standard CPU inference to NPU execution, maintaining visual quality while drastically reducing inference latency and power consumption. Detailed logs and outputs are provided in the respective benchmarking directories.
+
+## Building the Android App
+
+```bash
+cd Code/LamaInpaint
+./pull_all_deps.sh
+./copy_qnn_libs.sh
+./gradlew assembleDebug
+```
